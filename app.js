@@ -8,7 +8,7 @@ require('colors');
 const MicroMQ = require('micromq');
 const pug_render = require('micromq-pug-render');
 
-require('dotenv')
+require('dotenv').config()
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -47,7 +47,7 @@ mq.all('/service2', (req, res) => {
 mq.all('/status2', (req, res) => {
   // отправляем json ответ
   res.json({
-    text: '✅ service 2 - work!',
+    text: '☯ service 2 - work!',
   });
 });
 
