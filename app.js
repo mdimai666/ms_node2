@@ -66,8 +66,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+let isConnectedToRabbit = () => !!mq.connection;
+
+app.use((req,res,next)=>{
+  req.isConnectedToRabbit = isConnectedToRabbit;
+  next();
+})
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.post('/restart', (req,res)=>{
+  // res.send('OK');
+  console.warn('/restart')
+  process.exit();
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
